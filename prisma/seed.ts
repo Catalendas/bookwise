@@ -12,12 +12,13 @@ async function main() {
   await prisma.category.deleteMany()
   await prisma.book.deleteMany()
 
+
   const usersSeed = users.map((user) => {
     return prisma.user.create({
       data: {
         id: user.id,
         name: user.name,
-        avatar_url: user.avatar_url,
+        image: user.avatar_url,
       },
     })
   })

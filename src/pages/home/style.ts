@@ -1,42 +1,124 @@
-import { Heading } from "@/components/Heading/style";
-import { styled } from "@/styles";
+import { Box } from "@/components/Box"
+import { styled } from "@stitches/react"
+import backGroundMenu from "../../assets/menu.png"
 
-export const Container = styled('section', {
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-})
+export const Container = styled('div', {
+    display: "flex",
 
-export const ImageContainer = styled('div', {
-    margin: '$5 0 $5 $5'
-})
+    section: {
+        border: '1px solid red',
+        marginLeft: '6rem',
+        width: '38rem',
+        paddingTop: '4.5rem',
 
-export const LoginContainer = styled('div', {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+        h2: {
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            fontWeight: 'bold',
+            fontSize: '1.5rem',
+            marginBottom: '2.5rem',
 
-    '> div': {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '$10',
+            svg: {
+                minWidth: '2rem',
+                minHeight: '2rem',
+            }
+        },
+        
+        '> div': {
+            marginTop: '1rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px',
+        }
     }
 })
 
-export const ButtonContainer = styled('div', {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '$4',
-})
+export const Menu = styled(Box, {
+    background: `url(${backGroundMenu})`,
+    width: '14.5rem',
+    height: '61.75rem',
+    margin: '20px 0px 20px 20px',
 
-export const HeadingContainer = styled('div', {
-    [`& ${Heading}`]: {
-        lineHeight: '$short'
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    
+    '> a': {
+        textDecoration: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        fontWeight: 'bold',
+        fontSize: '20px',
+
+        background: 'linear-gradient(90deg, #7FD1CC 0%, #9694F5 100%)',
+        "-webkit-background-clip": "text",
+        "background-clip": "text",
+        "-webkit-text-fill-color": "transparent",
     },
 
-    p: {
-        lineHeight: '$base',
-        color: '$gray200',
+    nav: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '4rem',
+        gap: '1rem',
+        width: '120px',
+        height: '158px',
+        // border: '1px solid red',
+
+        a: {
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            fontWeight: 'normal',
+            fontSize: '20px',
+            color: '$gray400', 
+            // paddingLeft: '1rem',
+            position: 'relative',
+            // boder: '1px solid red',
+            
+            '&:hover::before': {
+                content: '',
+                width: '4px',
+                height: '24px',
+                position: 'absolute',
+                left: '-20px',
+                top: '5px',
+                background: 'linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)',
+                borderRadius: '25%'
+            },
+
+            '&:hover': {
+                fontWeight: 'bold',
+                color: '$gray100',
+            },
+
+            svg: {
+                minWidth: '24px',
+                minHeight: '24px',
+            }
+        }
+    },
+
+    div: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '4rem',
+        gap: '1rem',
+    },
+
+    button: {
+        all: 'unset',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        fontSize: '1rem',
+        fontWeight: 'normal',
+
+        marginTop: '40rem',
+
+        cursor: 'pointer',
     }
 })

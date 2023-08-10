@@ -8,14 +8,21 @@ import homeImage from '../../assets/image.png'
 import GoogleIcon from '../../assets/google-icon.svg'
 import GitHubIcon from '../../assets/github-icon.svg'
 import RocketLaunchIcon from '../../assets/rocketLaunch-icon.svg'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 
-export default function Home() {
+export default function Login() {
 
     const session = useSession()
+    const router = useRouter()
     const isSignedIn = session.status == "authenticated"
-    console.log(session)
+
+    useEffect(() => {
+        if (isSignedIn) {
+            router.push("/home")
+        }
+    }, [session])
 
     return (
         <Container>
