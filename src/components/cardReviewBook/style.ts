@@ -25,7 +25,7 @@ export const HeaderProfile = styled('div', {
 
 export const StarContainer = styled('div', {
     width: '6rem',
-    height: '1rem'
+    height: '1rem',
 })
 
 export const Content = styled('div', {
@@ -54,3 +54,4 @@ export const Content = styled('div', {
         }
     }
 })
+

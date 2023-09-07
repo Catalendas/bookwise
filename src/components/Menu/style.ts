@@ -1,78 +1,13 @@
-import { Box } from "@/components/Box"
-import { styled } from "@stitches/react"
+import { styled } from "@/styles";
+import { Box } from "../Box";
 import backGroundMenu from "../../assets/menu.png"
 
-export const Container = styled('div', {
-    display: "flex",
-
-    section: {
-        height: '60rem',
-        marginLeft: '21.75rem',
-        width: '38rem',
-        paddingTop: '4.5rem',
-
-        h2: {
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            fontWeight: 'bold',
-            fontSize: '1.5rem',
-            marginBottom: '2.5rem',
-
-            svg: {
-                minWidth: '2rem',
-                minHeight: '2rem',
-            }
-        },
-        
-        '> div': {
-            marginTop: '1rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px',
-            overflowY: 'scroll',
-            height: '100%',
-
-            '&::-webkit-scrollbar': {
-                width: '10px',
-            },
-            
-            '&::-webkit-scrollbar-track': {
-                backGroundColor: 'transparent',
-            },
-            
-            '&::-webkit-scrollbar-thumb': {
-                backgroundColor: '#888', 
-                borderRadius: '10px',
-            },
-
-            '&::-webkit-scrollbar-thumb:hover': {   
-                backgroundColor: '#555',
-            }
-        },
-
-    },
-
-    article: {
-        marginLeft: '4rem',
-        height: '602px',
-        width: '20.25rem',
-        marginTop: '146px',
-
-        '> div': {
-            marginTop: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-        }
-    }
-})
-
-export const Menu = styled(Box, {
+export const MenuContainer = styled(Box, {
     background: `url(${backGroundMenu})`,
     width: '14.5rem',
     height: '61.75rem',
     margin: '20px 0px 20px 20px',
+    position: 'absolute',
 
     display: 'flex',
     alignItems: 'center',
@@ -156,4 +91,3 @@ export const Menu = styled(Box, {
         cursor: 'pointer',
     }
 })
-

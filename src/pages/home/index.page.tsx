@@ -1,72 +1,29 @@
-import libIcon from "../../assets/lib-icon.svg"
-import Image from "next/image";
-import Link from "next/link";
-import { Container, Menu } from "./style";
-import { ChartLineUp, Binoculars, User, SignIn, SignOut } from "phosphor-react";
-import { signOut, useSession } from "next-auth/react";
-import { Avatar } from "@/components/Avatar";
-import { CardReviewBook, CardReviewBookProps } from "@/components/cardReviewBook";
-import {prisma} from "../../../lib/prisma";
-import { useEffect } from "react"
-import { GetServerSideProps } from "next";
+import { Container} from "./style";
+import { ChartLineUp } from "phosphor-react";
+import { CardReviewBook } from "@/components/cardReviewBook";
+import { useEffect, useState } from "react"
+import { api } from "../../../lib/axios";
+import { PopularCardBook } from "@/components/PopularCardBooks";
+import { Menu } from "@/components/Menu";
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    const posts = await prisma.book.findMany()
-  
-    posts.forEach(e => {
-        e.created_at = String(e.created_at)
-    })
+
+export default function Home() {
     
-    return { 
-        props: { 
-            posts, 
-        }
-    }
-}
-
-export default function Home({posts}) {
-
-    const { data: session } = useSession()
-    console.log(posts)
-
-
+    const [ ratings, setRatings] = useState([])
+    const [ ordeningRatings, setOrdeningsRatings ] = useState([])
+    
+    useEffect(() => {
+        api.get('/posts/booksPost')
+        .then((response) => {
+            setRatings(response.data.mappedRating)
+            setOrdeningsRatings(response.data.mappedRating.sort((a, b) => b.rate - a.rate).splice(0, 4))
+        })
+    }, [])
+    
 
     return (
         <Container>
-            <Menu>
-                <Link 
-                    href="/"
-                >
-                    <Image 
-                        src={libIcon}
-                        alt=""/>
-                    <p>BookWise</p>
-                </Link>
-
-                <nav>
-                    <Link href="#"
-
-                    ><ChartLineUp />Início</Link>
-                    <Link href="#"><Binoculars/>Explorar</Link>
-                    {session && <Link href="#"><User/>Perfil</Link>}
-                </nav>
-
-                <div>
-                    {!session 
-                        ?  
-                            <button>
-                                Fazer Login
-                                <SignIn color="#50B2C0"/>
-                            </button>
-                        : 
-                        <button onClick={() => signOut()}>
-                            <Avatar src={session.user.image}/>
-                            {session.user.name}
-                            <SignOut color="#F75A68"/>
-                        </button>
-                    }
-                </div>
-            </Menu>
+            <Menu />
             <section>
                 <h2>
                     <ChartLineUp color="#50B2C0"/>
@@ -78,24 +35,39 @@ export default function Home({posts}) {
                 </span>
 
                 <div>
-                    {posts.map(item => {
+                    {ratings.map(item => {
                         return (
                             <CardReviewBook 
-                                // profilename={}
+                                rate={item.rate}
+                                profileavatar={item.user.image}
+                                profilename={item.user.name}
                                 date={item.created_at}
-                                image={item.cover_url}
-                                author={item.author}
-                                booktitle={item.name}
-                                resume={item.summary}
+                                image={item.book.cover_url}
+                                author={item.book.author}
+                                booktitle={item.book.name}
+                                resume={item.description}
                                 key={item.id}
                             />
                         )
                     })}
-                    {/* <CardReviewBook /> */}
                 </div>
             </section>
             <article>
-
+                <span>
+                    Livros populares
+                </span>
+                <div>
+                    {ordeningRatings.map(ratings => {
+                        return (
+                            <PopularCardBook 
+                                author={ratings.book.author}
+                                cardTitle={ratings.book.name}
+                                image={ratings.book.cover_url}
+                                rate={ratings.rate}
+                            />
+                        )
+                    })}
+                </div>
             </article>
         </Container>
     )

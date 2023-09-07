@@ -4,15 +4,14 @@ import { Box } from '../Box'
 import { StarContainer } from './style'
 
 export interface StarProps extends ComponentProps<typeof Box> {
-    avalibili?: number
-
+    ratingStar?: number
 }
 
 
-export function StarList({avalibili, ...props}: StarProps) {
+export function StarList({ratingStar, ...props}: StarProps) {
 
-    const [rating, setRating] = useState(0 || avalibili)
-    const [hover, setHover] = useState(0 || avalibili)
+    const [rating, setRating] = useState(0 || ratingStar)
+    const [hover, setHover] = useState(0 || ratingStar)
 
     return (
         <StarContainer {...props}>

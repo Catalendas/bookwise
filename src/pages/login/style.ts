@@ -25,11 +25,7 @@ export const LoginContainer = styled('div', {
     }
 })
 
-export const ButtonContainer = styled('div', {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '$4',
-})
+
 
 export const HeadingContainer = styled('div', {
     [`& ${Heading}`]: {

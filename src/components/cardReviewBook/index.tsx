@@ -5,26 +5,28 @@ import { StarList } from "../Stars/intex";
 import { Container, Content, HeaderAvaliation, HeaderProfile, StarContainer } from "./style";
 
 export interface CardReviewBookProps {
-    // profilename: string
+    profileavatar: string,
+    profilename: string
     date: string
     image: string
     booktitle: string
     author: string
     resume: string
+    rate: number
 }
 
-export function CardReviewBook({ date, image, booktitle, author, resume}: CardReviewBookProps) {
+export function CardReviewBook({ date, rate, image, booktitle, author, resume, profilename, profileavatar}: CardReviewBookProps) {
 
     return (
         <Container>
             <HeaderAvaliation>
-                <Avatar/>
+                <Avatar src={profileavatar}/>
                 <HeaderProfile>
-                    <h3>jhondoe</h3>
+                    <h3>{profilename}</h3>
                     <span>{date}</span>
                 </HeaderProfile>
                 <StarContainer>
-                    <StarList avalibili={4}/>
+                    <StarList ratingStar={rate}/>
                 </StarContainer>
             </HeaderAvaliation>
             <Content>
@@ -32,7 +34,7 @@ export function CardReviewBook({ date, image, booktitle, author, resume}: CardRe
                     width={108}
                     height={152}
                     alt="picture"
-                    src={`/${image}`}
+                    src={image}
                 />
                 <div>
                     <div>
